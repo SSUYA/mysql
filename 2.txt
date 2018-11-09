@@ -1,0 +1,167 @@
+Microsoft Windows [版本 10.0.17134.345]
+(c) 2018 Microsoft Corporation。保留所有权利。
+
+C:\WINDOWS\system32>mysql -u root -p
+Enter password: ******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 46
+Server version: 8.0.12 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use su;
+Database changed
+mysql> show tables
+    -> show tables;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'show tables' at line 2
+mysql> show tables;
++--------------+
+| Tables_in_su |
++--------------+
+| dept         |
+| emp          |
+| salgrade     |
+| ss1          |
++--------------+
+4 rows in set (0.01 sec)
+
+mysql> select * from emp;
++-------+--------+-----------+------+------------+------+---------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL  | COMM    | DEPTNO |
++-------+--------+-----------+------+------------+------+---------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980/12/17 |  800 |         | 20     |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981/2/20  | 1600 | 300.00  | 30     |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981/2/22  | 1250 | 500.00  | 30     |
+|  7566 | JONES  | MANAGER   | 7839 | 1981/4/2   | 2975 |         | 20     |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981/9/28  | 1250 | 1400.00 | 30     |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981/5/1   | 2850 |         | 30     |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981/6/9   | 2450 |         | 10     |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1987/4/19  | 3000 |         | 20     |
+|  7839 | KING   | PRESIDENT |      | 1981/11/17 | 5000 |         | 10     |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981/9/8   | 1500 | 0.00    | 30     |
+|  7876 | ADAMS  | CLERK     | 7788 | 1987/5/23  | 1100 |         | 20     |
+|  7900 | JAMES  | CLERK     | 7698 | 1981/12/3  |  950 |         | 30     |
+|  7902 | FORD   | ANALYST   | 7566 | 1981/12/3  | 3000 |         | 20     |
+|  7934 | MILLER | CLERK     | 7782 | 1982/1/23  | 1300 |         | 10     |
++-------+--------+-----------+------+------------+------+---------+--------+
+14 rows in set (0.00 sec)
+
+mysql> select * from emp order by SAL;
++-------+--------+-----------+------+------------+------+---------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL  | COMM    | DEPTNO |
++-------+--------+-----------+------+------------+------+---------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980/12/17 |  800 |         | 20     |
+|  7900 | JAMES  | CLERK     | 7698 | 1981/12/3  |  950 |         | 30     |
+|  7876 | ADAMS  | CLERK     | 7788 | 1987/5/23  | 1100 |         | 20     |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981/2/22  | 1250 | 500.00  | 30     |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981/9/28  | 1250 | 1400.00 | 30     |
+|  7934 | MILLER | CLERK     | 7782 | 1982/1/23  | 1300 |         | 10     |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981/9/8   | 1500 | 0.00    | 30     |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981/2/20  | 1600 | 300.00  | 30     |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981/6/9   | 2450 |         | 10     |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981/5/1   | 2850 |         | 30     |
+|  7566 | JONES  | MANAGER   | 7839 | 1981/4/2   | 2975 |         | 20     |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1987/4/19  | 3000 |         | 20     |
+|  7902 | FORD   | ANALYST   | 7566 | 1981/12/3  | 3000 |         | 20     |
+|  7839 | KING   | PRESIDENT |      | 1981/11/17 | 5000 |         | 10     |
++-------+--------+-----------+------+------------+------+---------+--------+
+14 rows in set (0.00 sec)
+
+mysql> select sum(DEPTNO) from emp;
++-------------+
+| sum(DEPTNO) |
++-------------+
+|         310 |
++-------------+
+1 row in set (0.02 sec)
+
+mysql> select * from jobs,job_history where job. JOB_ID=job_history.JOB_ID;
+ERROR 1146 (42S02): Table 'su.jobs' doesn't exist
+mysql> select * from jobs,job_history where jobs. JOB_ID=job_history.JOB_ID;
+ERROR 1146 (42S02): Table 'su.jobs' doesn't exist
+mysql> select * from jobs,job_history where jobs.JOB_ID=job_history.JOB_ID;
+ERROR 1146 (42S02): Table 'su.jobs' doesn't exist
+mysql> alter table dept add ok int(1) default 0;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table emp add ok int(1) default 0;
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from dept,emp where dept,ok=emp,ok;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',ok=emp,ok' at line 1
+mysql> select * from dept.emp where dept,ok=emp.ok;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',ok=emp.ok' at line 1
+mysql>  select * from dept.emp where dept.ok=emp.ok;
+ERROR 1049 (42000): Unknown database 'dept'
+mysql>  select * from dept,emp where dept.ok=emp.ok;
++--------+------------+----------+------+-------+--------+-----------+------+------------+------+---------+--------+------+
+| DEPTNO | DNAME      | LOC      | ok   | EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL  | COMM    | DEPTNO | ok   |
++--------+------------+----------+------+-------+--------+-----------+------+------------+------+---------+--------+------+
+|     10 | ACCOUNTING | NEW YORK |    0 |  7369 | SMITH  | CLERK     | 7902 | 1980/12/17 |  800 |         | 20     |    0 |
+|     20 | RESEARCH   | DALLAS   |    0 |  7369 | SMITH  | CLERK     | 7902 | 1980/12/17 |  800 |         | 20     |    0 |
+|     30 | SALES      | CHICAGO  |    0 |  7369 | SMITH  | CLERK     | 7902 | 1980/12/17 |  800 |         | 20     |    0 |
+|     40 | OPERATIONS | BOSTON   |    0 |  7369 | SMITH  | CLERK     | 7902 | 1980/12/17 |  800 |         | 20     |    0 |
+|     10 | ACCOUNTING | NEW YORK |    0 |  7499 | ALLEN  | SALESMAN  | 7698 | 1981/2/20  | 1600 | 300.00  | 30     |    0 |
+|     20 | RESEARCH   | DALLAS   |    0 |  7499 | ALLEN  | SALESMAN  | 7698 | 1981/2/20  | 1600 | 300.00  | 30     |    0 |
+|     30 | SALES      | CHICAGO  |    0 |  7499 | ALLEN  | SALESMAN  | 7698 | 1981/2/20  | 1600 | 300.00  | 30     |    0 |
+|     40 | OPERATIONS | BOSTON   |    0 |  7499 | ALLEN  | SALESMAN  | 7698 | 1981/2/20  | 1600 | 300.00  | 30     |    0 |
+|     10 | ACCOUNTING | NEW YORK |    0 |  7521 | WARD   | SALESMAN  | 7698 | 1981/2/22  | 1250 | 500.00  | 30     |    0 |
+|     20 | RESEARCH   | DALLAS   |    0 |  7521 | WARD   | SALESMAN  | 7698 | 1981/2/22  | 1250 | 500.00  | 30     |    0 |
+|     30 | SALES      | CHICAGO  |    0 |  7521 | WARD   | SALESMAN  | 7698 | 1981/2/22  | 1250 | 500.00  | 30     |    0 |
+|     40 | OPERATIONS | BOSTON   |    0 |  7521 | WARD   | SALESMAN  | 7698 | 1981/2/22  | 1250 | 500.00  | 30     |    0 |
+|     10 | ACCOUNTING | NEW YORK |    0 |  7566 | JONES  | MANAGER   | 7839 | 1981/4/2   | 2975 |         | 20     |    0 |
+|     20 | RESEARCH   | DALLAS   |    0 |  7566 | JONES  | MANAGER   | 7839 | 1981/4/2   | 2975 |         | 20     |    0 |
+|     30 | SALES      | CHICAGO  |    0 |  7566 | JONES  | MANAGER   | 7839 | 1981/4/2   | 2975 |         | 20     |    0 |
+|     40 | OPERATIONS | BOSTON   |    0 |  7566 | JONES  | MANAGER   | 7839 | 1981/4/2   | 2975 |         | 20     |    0 |
+|     10 | ACCOUNTING | NEW YORK |    0 |  7654 | MARTIN | SALESMAN  | 7698 | 1981/9/28  | 1250 | 1400.00 | 30     |    0 |
+|     20 | RESEARCH   | DALLAS   |    0 |  7654 | MARTIN | SALESMAN  | 7698 | 1981/9/28  | 1250 | 1400.00 | 30     |    0 |
+|     30 | SALES      | CHICAGO  |    0 |  7654 | MARTIN | SALESMAN  | 7698 | 1981/9/28  | 1250 | 1400.00 | 30     |    0 |
+|     40 | OPERATIONS | BOSTON   |    0 |  7654 | MARTIN | SALESMAN  | 7698 | 1981/9/28  | 1250 | 1400.00 | 30     |    0 |
+|     10 | ACCOUNTING | NEW YORK |    0 |  7698 | BLAKE  | MANAGER   | 7839 | 1981/5/1   | 2850 |         | 30     |    0 |
+|     20 | RESEARCH   | DALLAS   |    0 |  7698 | BLAKE  | MANAGER   | 7839 | 1981/5/1   | 2850 |         | 30     |    0 |
+|     30 | SALES      | CHICAGO  |    0 |  7698 | BLAKE  | MANAGER   | 7839 | 1981/5/1   | 2850 |         | 30     |    0 |
+|     40 | OPERATIONS | BOSTON   |    0 |  7698 | BLAKE  | MANAGER   | 7839 | 1981/5/1   | 2850 |         | 30     |    0 |
+|     10 | ACCOUNTING | NEW YORK |    0 |  7782 | CLARK  | MANAGER   | 7839 | 1981/6/9   | 2450 |         | 10     |    0 |
+|     20 | RESEARCH   | DALLAS   |    0 |  7782 | CLARK  | MANAGER   | 7839 | 1981/6/9   | 2450 |         | 10     |    0 |
+|     30 | SALES      | CHICAGO  |    0 |  7782 | CLARK  | MANAGER   | 7839 | 1981/6/9   | 2450 |         | 10     |    0 |
+|     40 | OPERATIONS | BOSTON   |    0 |  7782 | CLARK  | MANAGER   | 7839 | 1981/6/9   | 2450 |         | 10     |    0 |
+|     10 | ACCOUNTING | NEW YORK |    0 |  7788 | SCOTT  | ANALYST   | 7566 | 1987/4/19  | 3000 |         | 20     |    0 |
+|     20 | RESEARCH   | DALLAS   |    0 |  7788 | SCOTT  | ANALYST   | 7566 | 1987/4/19  | 3000 |         | 20     |    0 |
+|     30 | SALES      | CHICAGO  |    0 |  7788 | SCOTT  | ANALYST   | 7566 | 1987/4/19  | 3000 |         | 20     |    0 |
+|     40 | OPERATIONS | BOSTON   |    0 |  7788 | SCOTT  | ANALYST   | 7566 | 1987/4/19  | 3000 |         | 20     |    0 |
+|     10 | ACCOUNTING | NEW YORK |    0 |  7839 | KING   | PRESIDENT |      | 1981/11/17 | 5000 |         | 10     |    0 |
+|     20 | RESEARCH   | DALLAS   |    0 |  7839 | KING   | PRESIDENT |      | 1981/11/17 | 5000 |         | 10     |    0 |
+|     30 | SALES      | CHICAGO  |    0 |  7839 | KING   | PRESIDENT |      | 1981/11/17 | 5000 |         | 10     |    0 |
+|     40 | OPERATIONS | BOSTON   |    0 |  7839 | KING   | PRESIDENT |      | 1981/11/17 | 5000 |         | 10     |    0 |
+|     10 | ACCOUNTING | NEW YORK |    0 |  7844 | TURNER | SALESMAN  | 7698 | 1981/9/8   | 1500 | 0.00    | 30     |    0 |
+|     20 | RESEARCH   | DALLAS   |    0 |  7844 | TURNER | SALESMAN  | 7698 | 1981/9/8   | 1500 | 0.00    | 30     |    0 |
+|     30 | SALES      | CHICAGO  |    0 |  7844 | TURNER | SALESMAN  | 7698 | 1981/9/8   | 1500 | 0.00    | 30     |    0 |
+|     40 | OPERATIONS | BOSTON   |    0 |  7844 | TURNER | SALESMAN  | 7698 | 1981/9/8   | 1500 | 0.00    | 30     |    0 |
+|     10 | ACCOUNTING | NEW YORK |    0 |  7876 | ADAMS  | CLERK     | 7788 | 1987/5/23  | 1100 |         | 20     |    0 |
+|     20 | RESEARCH   | DALLAS   |    0 |  7876 | ADAMS  | CLERK     | 7788 | 1987/5/23  | 1100 |         | 20     |    0 |
+|     30 | SALES      | CHICAGO  |    0 |  7876 | ADAMS  | CLERK     | 7788 | 1987/5/23  | 1100 |         | 20     |    0 |
+|     40 | OPERATIONS | BOSTON   |    0 |  7876 | ADAMS  | CLERK     | 7788 | 1987/5/23  | 1100 |         | 20     |    0 |
+|     10 | ACCOUNTING | NEW YORK |    0 |  7900 | JAMES  | CLERK     | 7698 | 1981/12/3  |  950 |         | 30     |    0 |
+|     20 | RESEARCH   | DALLAS   |    0 |  7900 | JAMES  | CLERK     | 7698 | 1981/12/3  |  950 |         | 30     |    0 |
+|     30 | SALES      | CHICAGO  |    0 |  7900 | JAMES  | CLERK     | 7698 | 1981/12/3  |  950 |         | 30     |    0 |
+|     40 | OPERATIONS | BOSTON   |    0 |  7900 | JAMES  | CLERK     | 7698 | 1981/12/3  |  950 |         | 30     |    0 |
+|     10 | ACCOUNTING | NEW YORK |    0 |  7902 | FORD   | ANALYST   | 7566 | 1981/12/3  | 3000 |         | 20     |    0 |
+|     20 | RESEARCH   | DALLAS   |    0 |  7902 | FORD   | ANALYST   | 7566 | 1981/12/3  | 3000 |         | 20     |    0 |
+|     30 | SALES      | CHICAGO  |    0 |  7902 | FORD   | ANALYST   | 7566 | 1981/12/3  | 3000 |         | 20     |    0 |
+|     40 | OPERATIONS | BOSTON   |    0 |  7902 | FORD   | ANALYST   | 7566 | 1981/12/3  | 3000 |         | 20     |    0 |
+|     10 | ACCOUNTING | NEW YORK |    0 |  7934 | MILLER | CLERK     | 7782 | 1982/1/23  | 1300 |         | 10     |    0 |
+|     20 | RESEARCH   | DALLAS   |    0 |  7934 | MILLER | CLERK     | 7782 | 1982/1/23  | 1300 |         | 10     |    0 |
+|     30 | SALES      | CHICAGO  |    0 |  7934 | MILLER | CLERK     | 7782 | 1982/1/23  | 1300 |         | 10     |    0 |
+|     40 | OPERATIONS | BOSTON   |    0 |  7934 | MILLER | CLERK     | 7782 | 1982/1/23  | 1300 |         | 10     |    0 |
++--------+------------+----------+------+-------+--------+-----------+------+------------+------+---------+--------+------+
+56 rows in set (0.00 sec)
+
+mysql>
