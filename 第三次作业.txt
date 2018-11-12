@@ -1,0 +1,53 @@
+C:\WINDOWS\system32>mysql -u root -p
+Enter password: ******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 62
+Server version: 8.0.12 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create table shoucangbiao;
+ERROR 1046 (3D000): No database selected
+mysql> create database sy;
+Query OK, 1 row affected (0.15 sec)
+
+mysql> create table shoucangbiao(id int(10) unique primary key,wupin varchar(20) not null,love enum('Y','N'));
+ERROR 1046 (3D000): No database selected
+mysql> use sy;
+Database changed
+mysql>  create table shoucangbiao(id int(10) unique primary key,wupin varchar(20) not null,love enum('Y','N'));
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> desc shoucangbiao;
++-------+---------------+------+-----+---------+-------+
+| Field | Type          | Null | Key | Default | Extra |
++-------+---------------+------+-----+---------+-------+
+| id    | int(10)       | NO   | PRI | NULL    |       |
+| wupin | varchar(20)   | NO   |     | NULL    |       |
+| love  | enum('Y','N') | YES  |     | NULL    |       |
++-------+---------------+------+-----+---------+-------+
+3 rows in set (0.03 sec)
+
+mysql> insert into shoucangbiao(id,wupin,favorites) values(1,'mianmo','N'),(2,'clothes','Y'),(3,'shoes','Y');
+ERROR 1054 (42S22): Unknown column 'favorites' in 'field list'
+mysql> insert into shoucangbiao(id,wupin,love) values(1,'mianmo','N'),(2,'clothes','Y'),(3,'shoes','Y');
+Query OK, 3 rows affected (0.03 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from shoucangbiao;
++----+---------+------+
+| id | wupin   | love |
++----+---------+------+
+|  1 | mianmo  | N    |
+|  2 | clothes | Y    |
+|  3 | shoes   | Y    |
++----+---------+------+
+3 rows in set (0.01 sec)
+
+mysql>
